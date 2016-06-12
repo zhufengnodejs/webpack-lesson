@@ -5,4 +5,12 @@ module.exports = {
         path: path.resolve(__dirname, 'build'),//输出路径
         filename: 'bundle.js' //输出文件名
     },
+    module: {
+        loaders: [
+            {
+                test: /\.js$/,
+                loader: 'babel-loader'
+            }
+        ]
+    }
 };

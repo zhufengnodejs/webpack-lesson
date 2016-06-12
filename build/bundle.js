@@ -44,14 +44,26 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var comp = __webpack_require__(1);
-	console.log(comp.name);
+	'use strict';
+
+	var _component = __webpack_require__(1);
+
+	var _component2 = _interopRequireDefault(_component);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	console.log(_component2.default);
 
 /***/ },
 /* 1 */
 /***/ function(module, exports) {
 
-	exports.name = 'zfpx';
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = name = 'zfpx';
 
 /***/ }
 /******/ ]);

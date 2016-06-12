@@ -1,1 +1,1 @@
-exports.name = 'zfpx';
+export default name = 'zfpx';
