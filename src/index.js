@@ -1,4 +1,4 @@
 import comp from './component';
 import $ from 'jquery'
-document.write(comp);
+require('./index.less');
 $('#app').html(comp);
