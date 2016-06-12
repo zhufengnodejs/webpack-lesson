@@ -1,5 +1,7 @@
 var path = require('path');
 var jqueryPath = path.join(__dirname, "./node_modules/jquery/dist/jquery.js");
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var openBrowserWebpackPlugin = require('open-browser-webpack-plugin');
 
 function rewriteUrl(replacePath) {//重写url
     return function (req, opt) {
@@ -20,24 +22,37 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                loader: 'babel-loader'
+                loader: 'babel-loader',
+                exclude:/node_modules/
             },
             {
                 test: /\.less/,
                 loader: 'style!css!less'
+            },
+            {
+                test: /\.css/,
+                loader: 'style!css'
+            },
+            {
+                test: /\.(woff|woff2|ttf|svg|eot)(\?v=\d+\.\d+\.\d+)?$/,
+                loader: "url?limit=10000"
+            },
+            {
+                test: /\.(jpg|png)$/,
+                loader: "url?limit=8192"
             }
         ],
         noParse: [jqueryPath]
     },
     resolve: {
-       extensions: ["",".js",".css",".json"],
+        extensions: ["", ".js", ".css", ".json"],
         alias: {
             'jquery': jqueryPath
         }
     },
     devServer: {
-        publicPath: "/static/",//设置在html页面中访问产出文件的路径前缀
-        stats: { colors: true }, //显示颜色
+        inline:true,
+        stats: {colors: true}, //显示颜色
         port: 8080,//端口
         contentBase: 'build',//指定静态文件的根目录
         proxy: [
@@ -48,5 +63,12 @@ module.exports = {
                 changeOrigin: true                //修改来源地址
             }
         ]
-    }
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            title: '珠峰React课程',
+            template: './src/index.html'
+        }),
+        new openBrowserWebpackPlugin({ url: 'http://localhost:8080' })
+    ]
 };
