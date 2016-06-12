@@ -1,4 +1,5 @@
 var path = require('path');
+var jqueryPath = path.join(__dirname, "./node_modules/jquery/dist/jquery.js");
 
 function rewriteUrl(replacePath) {//重写url
     return function (req, opt) {
@@ -21,7 +22,14 @@ module.exports = {
                 test: /\.js$/,
                 loader: 'babel-loader'
             }
-        ]
+        ],
+        noParse: [jqueryPath]
+    },
+    resolve: {
+       extensions: ["",".js",".css",".json"],
+        alias: {
+            'jquery': jqueryPath
+        }
     },
     devServer: {
         publicPath: "/static/",//设置在html页面中访问产出文件的路径前缀
