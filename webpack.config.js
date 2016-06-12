@@ -25,19 +25,30 @@ module.exports = {
             {
                 test: /\.less/,
                 loader: 'style!css!less'
+            },
+            {
+                test: /\.css/,
+                loader: 'style!css'
+            },
+            {
+                test: /\.(woff|woff2|ttf|svg|eot)(\?v=\d+\.\d+\.\d+)?$/,
+                loader: "url?limit=10000"
+            },
+            {
+                test: /\.(jpg|png)$/,
+                loader: "url?limit=8192"
             }
         ],
         noParse: [jqueryPath]
     },
     resolve: {
-       extensions: ["",".js",".css",".json"],
+        extensions: ["", ".js", ".css", ".json"],
         alias: {
             'jquery': jqueryPath
         }
     },
     devServer: {
-        publicPath: "/static/",//设置在html页面中访问产出文件的路径前缀
-        stats: { colors: true }, //显示颜色
+        stats: {colors: true}, //显示颜色
         port: 8080,//端口
         contentBase: 'build',//指定静态文件的根目录
         proxy: [
