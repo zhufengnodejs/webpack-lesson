@@ -26,7 +26,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                loader: 'babel-loader',
+                loaders: 'babel-loader',
                 exclude:/node_modules/
             },
             {
@@ -44,6 +44,10 @@ module.exports = {
             {
                 test: /\.(jpg|png)$/,
                 loader: "url?limit=8192"
+            },
+            {
+                test: /jquery.js$/,
+                loader: "expose?jQuery"
             }
         ],
         noParse: [jqueryPath]
