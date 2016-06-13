@@ -23,7 +23,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'build'),//输出路径
-        filename: '[name].js' //输出文件名
+        filename: '[name].[hash].js' //输出文件名
     },
     module: {
         loaders: [
