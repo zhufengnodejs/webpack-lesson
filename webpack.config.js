@@ -18,8 +18,8 @@ function rewriteUrl(replacePath) {//重写url
 
 module.exports = {
     entry: {
-        index:path.resolve(__dirname, 'src/index.js'),
-        vendor: ['jquery'],
+        a:path.resolve(__dirname, 'src/a.js'),
+        b: path.resolve(__dirname, 'src/b.js')
     },
     output: {
         path: path.resolve(__dirname, 'build'),//输出路径
@@ -82,7 +82,8 @@ module.exports = {
             title: '珠峰React课程',
             template: './src/index.html'
         }),
-        new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
-        new openBrowserWebpackPlugin({ url: 'http://localhost:8080' })
+        new webpack.optimize.CommonsChunkPlugin('common.js'),
+        new openBrowserWebpackPlugin({ url: 'http://localhost:8080' }),
+
     ]
 };
