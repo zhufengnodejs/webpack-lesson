@@ -2,6 +2,10 @@ var path = require('path');
 var jqueryPath = path.join(__dirname, "./node_modules/jquery/dist/jquery.js");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var openBrowserWebpackPlugin = require('open-browser-webpack-plugin');
+var webpack = require('webpack');
+var definePlugin = new webpack.DefinePlugin({
+    __DEV__: process.env.BUILD_DEV.trim() == 'dev'
+});
 
 function rewriteUrl(replacePath) {//重写url
     return function (req, opt) {
@@ -64,7 +68,9 @@ module.exports = {
             }
         ]
     },
+
     plugins: [
+        definePlugin,
         new HtmlWebpackPlugin({
             title: '珠峰React课程',
             template: './src/index.html'

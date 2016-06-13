@@ -7,4 +7,6 @@ var img = document.createElement("img");
 img.className = 'img-circle';
 img.src = require("./zfpx.jpg");
 document.body.appendChild(img);
-console.log('abc');
+if (__DEV__) {
+    document.write('开发环境的秘密数据');
+}

@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "dev": "webpack-dev-server"
+    "dev": "webpack-dev-server",
+    "publish-mac": "export BUILD_DEV=dev && webpack-dev-server",
+    "publish-win": "set BUILD_DEV=dev && webpack-dev-server"
   },
   "author": "",
   "license": "ISC",
