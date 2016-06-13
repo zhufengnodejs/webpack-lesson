@@ -7,6 +7,7 @@ var definePlugin = new webpack.DefinePlugin({
     __DEV__: (process.env.BUILD_DEV||'').trim() == 'dev'
 });
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 function rewriteUrl(replacePath) {//重写url
     return function (req, opt) {
         var queryIndex = req.url.indexOf('?');//取得?所在的索引
@@ -84,6 +85,23 @@ module.exports = {
         }),
         new webpack.optimize.CommonsChunkPlugin('common.js'),
         new openBrowserWebpackPlugin({ url: 'http://localhost:8080' }),
-
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        }),
+        new webpack.optimize.MinChunkSizePlugin({
+            compress: {
+                warnings: false
+            }
+        }),
+        // 查找相等或近似的模块，避免在最终生成的文件中出现重复的模块
+        new webpack.optimize.DedupePlugin(),
+        // 按引用频度来排序 ID，以便达到减少文件大小的效果
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.AggressiveMergingPlugin({
+            minSizeReduce: 1.5,
+            moveToParents: true
+        })
     ]
 };
