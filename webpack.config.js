@@ -17,10 +17,13 @@ function rewriteUrl(replacePath) {//重写url
 }
 
 module.exports = {
-    entry: path.resolve(__dirname, 'src/index.js'),//入口文件
+    entry: {
+        index:path.resolve(__dirname, 'src/index.js'),
+        vendor: ['jquery'],
+    },
     output: {
         path: path.resolve(__dirname, 'build'),//输出路径
-        filename: 'bundle.js' //输出文件名
+        filename: '[name].js' //输出文件名
     },
     module: {
         loaders: [
@@ -79,6 +82,7 @@ module.exports = {
             title: '珠峰React课程',
             template: './src/index.html'
         }),
+        new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
         new openBrowserWebpackPlugin({ url: 'http://localhost:8080' })
     ]
 };
