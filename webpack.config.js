@@ -6,7 +6,7 @@ var webpack = require('webpack');
 var definePlugin = new webpack.DefinePlugin({
     __DEV__: (process.env.BUILD_DEV||'').trim() == 'dev'
 });
-
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 function rewriteUrl(replacePath) {//重写url
     return function (req, opt) {
         var queryIndex = req.url.indexOf('?');//取得?所在的索引
@@ -31,11 +31,11 @@ module.exports = {
             },
             {
                 test: /\.less/,
-                loader: 'style!css!less'
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")
             },
             {
                 test: /\.css/,
-                loader: 'style!css'
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader")
             },
             {
                 test: /\.(woff|woff2|ttf|svg|eot)(\?v=\d+\.\d+\.\d+)?$/,
@@ -72,9 +72,9 @@ module.exports = {
             }
         ]
     },
-
     plugins: [
         definePlugin,
+        new ExtractTextPlugin("bundle.css"),
         new HtmlWebpackPlugin({
             title: '珠峰React课程',
             template: './src/index.html'
