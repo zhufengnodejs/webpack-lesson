@@ -4,7 +4,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var openBrowserWebpackPlugin = require('open-browser-webpack-plugin');
 var webpack = require('webpack');
 var definePlugin = new webpack.DefinePlugin({
-    __DEV__: process.env.BUILD_DEV.trim() == 'dev'
+    __DEV__: (process.env.BUILD_DEV||'').trim() == 'dev'
 });
 
 function rewriteUrl(replacePath) {//重写url
@@ -44,6 +44,10 @@ module.exports = {
             {
                 test: /\.(jpg|png)$/,
                 loader: "url?limit=8192"
+            },
+            {
+                test: /jquery.js$/,
+                loader: "expose?jQuery"
             }
         ],
         noParse: [jqueryPath]
