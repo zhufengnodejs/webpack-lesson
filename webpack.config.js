@@ -85,7 +85,7 @@ module.exports = {
         }),
         new webpack.optimize.CommonsChunkPlugin('common.js'),
         new openBrowserWebpackPlugin({ url: 'http://localhost:8080' }),
-        new webpack.optimize.UglifyJsPlugin({
+        new uglifyJsPlugin({
             compress: {
                 warnings: false
             }
