@@ -13,14 +13,14 @@ module.exports = {
         loaders: [
             {
                 test: /\.jsx?$/,
-                loader: 'babel',
-                query: { presets: ["es2015","react"] },
+                loaders: ['react-hot','babel?presets[]=es2015&presets[]=react'],
                 exclude:/node_modules/,
                 include:path.resolve(__dirname,'react')
             }
         ],
     },
     devServer: {
+        hot:true,
         inline:true,
         stats: {colors: true}, //显示颜色
         port: 8080,//端口
@@ -32,5 +32,6 @@ module.exports = {
             template: './react/index.html'
         }),
         new openBrowserWebpackPlugin({ url: 'http://localhost:8080' }),
+        new webpack.HotModuleReplacementPlugin()
     ]
 };
