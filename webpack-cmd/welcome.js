@@ -1,0 +1,1 @@
+module.exports = "欢迎光临珠峰培训";
